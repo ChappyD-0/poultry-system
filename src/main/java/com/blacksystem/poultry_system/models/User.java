@@ -7,6 +7,7 @@
  */
 package com.blacksystem.poultry_system.models;
 
+import com.blacksystem.poultry_system.models.employees.Employee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

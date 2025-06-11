@@ -7,6 +7,7 @@
  */
 package com.blacksystem.poultry_system.controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +39,17 @@ public class TestController {
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {
         return "Admin Board.";
+    }
+
+    @GetMapping("/flockkeeper")
+    @PreAuthorize("hasRole('FLOCKEERPER')")
+    public String adminAccesss() {
+        return "Admin Board.";
+    }
+
+    @GetMapping("/flockkeeper/only")
+    @PreAuthorize("hasRole('FLOCKEERPER')")
+    public ResponseEntity<String> onlyForFlockKeepers() {
+        return ResponseEntity.ok("Acceso permitido solo para ROLE_FLOCKEERPER");
     }
 }
