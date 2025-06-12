@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AverageWeightRepoository extends JpaRepository<AverageWeight, Integer> {
+public interface AverageWeightRepository extends JpaRepository<AverageWeight, Long> {
 }

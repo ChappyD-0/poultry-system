@@ -5,7 +5,7 @@
  *  Date: 6/10/25
  * -----------------------------------
  */
-package com.blacksystem.poultry_system.payload.poultryplant;
+package com.blacksystem.poultry_system.payload.poultryplant.request;
 
 
 import com.blacksystem.poultry_system.models.employees.FlockKeeper;

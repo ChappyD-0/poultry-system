@@ -8,7 +8,7 @@
 package com.blacksystem.poultry_system.service.poultryplant;
 
 import com.blacksystem.poultry_system.models.poultryplant.PoultryHouse;
-import com.blacksystem.poultry_system.payload.poultryplant.PoultryHouseRequest;
+import com.blacksystem.poultry_system.payload.poultryplant.request.PoultryHouseRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.PoultryHouseRepository;
 import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
@@ -100,6 +100,14 @@ public class PoultryHouseService {
         } catch (Exception e) {
             String message = messageService.get("response.error.fetching.poultryhouse");
             return ResponseEntity.badRequest().body(message);
+        }
+    }
+
+    public boolean findPoultryHouseById(Long idPoultry) {
+        try {
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
