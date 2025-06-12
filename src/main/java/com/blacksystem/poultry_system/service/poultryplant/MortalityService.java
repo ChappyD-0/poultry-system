@@ -10,13 +10,11 @@ package com.blacksystem.poultry_system.service.poultryplant;
 import com.blacksystem.poultry_system.models.poultryplant.Mortality;
 import com.blacksystem.poultry_system.payload.poultryplant.request.MortalityRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.MortalityRepository;
-import com.blacksystem.poultry_system.repository.poultryplant.PoultryHouseRepository;
+
 import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.xml.sax.EntityResolver;
 
-import javax.swing.text.html.parser.Entity;
 
 @Service
 public class MortalityService {
@@ -24,7 +22,7 @@ public class MortalityService {
     private final MortalityRepository mortalityRepository;
     private final MessageService messageService;
     private final PoultryHouseService poultryHouseService;
-    private final
+
 
     public MortalityService(MortalityRepository mortalityRepository, MessageService messageService,
                             PoultryHouseService poultryHouseService
