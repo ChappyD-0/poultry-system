@@ -15,14 +15,13 @@ import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
+// Código correcto ya fusionado y sin marcas de conflicto
 @Service
 public class MortalityService {
 
     private final MortalityRepository mortalityRepository;
     private final MessageService messageService;
     private final PoultryHouseService poultryHouseService;
-
 
     public MortalityService(MortalityRepository mortalityRepository, MessageService messageService,
                             PoultryHouseService poultryHouseService
