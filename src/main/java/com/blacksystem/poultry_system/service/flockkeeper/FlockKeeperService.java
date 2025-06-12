@@ -1,4 +1,3 @@
-// src/main/java/com/blacksystem/poultry_system/service/flockkeeper/FlockKeeperService.java
 package com.blacksystem.poultry_system.service.flockkeeper;
 
 import com.blacksystem.poultry_system.models.ERole;

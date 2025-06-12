@@ -1,4 +1,4 @@
-package com.blacksystem.poultry_system.config;
+package com.blacksystem.poultry_system.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

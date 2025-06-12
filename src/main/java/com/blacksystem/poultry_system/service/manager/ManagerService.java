@@ -1,4 +1,3 @@
-// src/main/java/com/blacksystem/poultry_system/service/manager/ManagerService.java
 package com.blacksystem.poultry_system.service.manager;
 
 import com.blacksystem.poultry_system.models.ERole;
