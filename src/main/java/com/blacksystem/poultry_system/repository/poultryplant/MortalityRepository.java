@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MortalityRepository extends CrudRepository<Mortality, Integer> {
+public interface MortalityRepository extends CrudRepository<Mortality, Long> {
 
 }

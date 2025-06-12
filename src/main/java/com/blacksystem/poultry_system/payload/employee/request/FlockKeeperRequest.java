@@ -10,10 +10,10 @@ public class FlockKeeperRequest {
     @NotBlank @Email @Size(max=50)      private String email;
     @NotBlank @Size(min=6,max=40)       private String password;
 
-    @NotBlank                            private String nameEmployee;
-    @NotBlank                            private String lastName;
-    private String middleName;
-    @NotNull                             private LocalDate birthDate;
-    @NotBlank                            private String urlPhotoId;
+    @NotBlank                           private String nameEmployee;
+    @NotBlank                           private String lastName;
+                                        private String middleName;
+    @NotNull                            private LocalDate birthDate;
+    @NotBlank                           private String urlPhotoId;
     @NotBlank @Size(min=12,max=13)      private String rfcEmployee;
 }

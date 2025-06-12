@@ -1,6 +1,7 @@
 package com.blacksystem.poultry_system.service.poultryplant;
 
 import com.blacksystem.poultry_system.models.poultryplant.PoultryHouse;
+
 import com.blacksystem.poultry_system.payload.poultryplant.request.PoultryHouseRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.PoultryHouseRepository;
 import com.blacksystem.poultry_system.service.MessageService;
@@ -53,7 +54,11 @@ public class PoultryHouseService {
                 .orElseThrow(() -> new RuntimeException("PoultryHouse no encontrada con ID: " + id));
     }
 
-    public Boolean findPoultryHouseById(Long idPoultryHouse) {
-        return poultryHouseRepository.existsById(idPoultryHouse);
+    public boolean findPoultryHouseById(Long idPoultry) {
+        try {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

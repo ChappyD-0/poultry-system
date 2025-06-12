@@ -10,9 +10,13 @@ package com.blacksystem.poultry_system.service.poultryplant;
 import com.blacksystem.poultry_system.models.poultryplant.Mortality;
 import com.blacksystem.poultry_system.payload.poultryplant.request.MortalityRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.MortalityRepository;
+import com.blacksystem.poultry_system.repository.poultryplant.PoultryHouseRepository;
 import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.xml.sax.EntityResolver;
+
+import javax.swing.text.html.parser.Entity;
 
 @Service
 public class MortalityService {
@@ -20,11 +24,11 @@ public class MortalityService {
     private final MortalityRepository mortalityRepository;
     private final MessageService messageService;
     private final PoultryHouseService poultryHouseService;
-
+    private final
 
     public MortalityService(MortalityRepository mortalityRepository, MessageService messageService,
                             PoultryHouseService poultryHouseService
-    ) {
+                            ) {
         this.mortalityRepository = mortalityRepository;
         this.messageService = messageService;
         this.poultryHouseService = poultryHouseService;
@@ -34,14 +38,14 @@ public class MortalityService {
     public ResponseEntity<String> createMortality(MortalityRequest mortalityRequest) {
         try {
             Mortality mortality = new Mortality();
-            mortality.setPoultryHouse(mortalityRequest.getPoultryHouse());
+                mortality.setPoultryHouse(mortalityRequest.getPoultryHouse());
 
-            mortality.setFlock(mortalityRequest.getFlock());
-            mortality.setDate(mortalityRequest.getDate());
-            mortality.setCountMortality(mortalityRequest.getCountMortality());
-            mortality.setCumulativeMortality(mortalityRequest.getCumulativeMortality());
-            mortalityRepository.save(mortality);
-            return  ResponseEntity.ok(messageService.get("mortality.created"));
+                mortality.setFlock(mortalityRequest.getFlock());
+                mortality.setDate(mortalityRequest.getDate());
+                mortality.setCountMortality(mortalityRequest.getCountMortality());
+                mortality.setCumulativeMortality(mortalityRequest.getCumulativeMortality());
+                mortalityRepository.save(mortality);
+                return  ResponseEntity.ok(messageService.get("mortality.created"));
 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(messageService.get("mortality.creation.error"));
@@ -92,5 +96,7 @@ public class MortalityService {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
 
 }
