@@ -18,7 +18,7 @@ public class AverageWeight {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_averegeWeight")
-    private long idAverageWeight;
+    private Long idAverageWeight;
     //Kazeta
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "poultry_house_id")

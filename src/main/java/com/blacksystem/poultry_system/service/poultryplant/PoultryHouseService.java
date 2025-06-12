@@ -45,4 +45,61 @@ public class PoultryHouseService {
             return ResponseEntity.badRequest().body(message);
         }
     }
+
+    public ResponseEntity<String> updatePoultryHouse(PoultryHouseRequest poultryHouseRequest, Long idPoultryHouse) {
+        try {
+            PoultryHouse poultryHouse = poultryHouseRepository.findById(idPoultryHouse)
+                    .orElseThrow(() -> new RuntimeException("Poultry House not found"));
+
+            poultryHouse.setIdPoultry(poultryHouseRequest.getIdPoultry());
+            poultryHouse.setZone(poultryHouseRequest.getZone());
+            poultryHouse.setFlockKeeper(poultryHouseRequest.getFlockKeeper());
+            poultryHouse.setPoultryHouseName(poultryHouseRequest.getPoultryHouseName());
+            poultryHouse.setFemaleCount(poultryHouseRequest.getFemaleCount());
+            poultryHouse.setMaleCount(poultryHouseRequest.getMaleCount());
+
+            poultryHouseRepository.save(poultryHouse);
+            String message = messageService.get("response.confirmation.update.poultryhouse");
+            return ResponseEntity.ok(message);
+
+        } catch (Exception e) {
+            String message = messageService.get("response.error.update.poultryhouse");
+            return ResponseEntity.badRequest().body(message);
+        }
+    }
+
+    public ResponseEntity<String> deletePoultryHouse(Long idPoultryHouse) {
+        try {
+            poultryHouseRepository.deleteById(idPoultryHouse);
+            String message = messageService.get("response.confirmation.deletion.poultryhouse");
+            return ResponseEntity.ok(message);
+        } catch (Exception e) {
+            String message = messageService.get("response.error.deletion.poultryhouse");
+            return ResponseEntity.badRequest().body(message);
+        }
+    }
+
+    public ResponseEntity<String> getAllPoultryHouses() {
+        try {
+            var poultryHouses = poultryHouseRepository.findAll();
+            if (poultryHouses.isEmpty()) {
+                return ResponseEntity.ok(messageService.get("response.no.poultryhouses.found"));
+            }
+            return ResponseEntity.ok(poultryHouses.toString());
+        } catch (Exception e) {
+            String message = messageService.get("response.error.fetching.poultryhouses");
+            return ResponseEntity.badRequest().body(message);
+        }
+    }
+
+    public ResponseEntity<String> getPoultryHouseById(Long idPoultryHouse) {
+        try {
+            PoultryHouse poultryHouse = poultryHouseRepository.findById(idPoultryHouse)
+                    .orElseThrow(() -> new RuntimeException(messageService.get("response.no.poultryhouses.found")));
+            return ResponseEntity.ok(poultryHouse.toString());
+        } catch (Exception e) {
+            String message = messageService.get("response.error.fetching.poultryhouse");
+            return ResponseEntity.badRequest().body(message);
+        }
+    }
 }

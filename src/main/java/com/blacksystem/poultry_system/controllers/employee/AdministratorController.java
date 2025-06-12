@@ -1,9 +1,9 @@
 
 package com.blacksystem.poultry_system.controllers.employee;
 
-import com.blacksystem.poultry_system.payload.employee.request.FlockKeeperRequest;
-import com.blacksystem.poultry_system.payload.employee.response.FlockKeeperResponse;
-import com.blacksystem.poultry_system.service.flockkeeper.FlockKeeperService;
+import com.blacksystem.poultry_system.payload.employee.request.AdministratorRequest;
+import com.blacksystem.poultry_system.payload.employee.response.AdministratorResponse;
+import com.blacksystem.poultry_system.service.adminstrator.AdministratorService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,39 +12,39 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/flockkeepers")
-public class FlockKeeperController {
+@RequestMapping("/api/administrators")
+public class AdministratorController {
 
-    private final FlockKeeperService svc;
+    private final AdministratorService svc;
 
-    public FlockKeeperController(FlockKeeperService svc) {
+    public AdministratorController(AdministratorService svc) {
         this.svc = svc;
     }
 
     @PostMapping
-    public ResponseEntity<FlockKeeperResponse> create(@Valid @RequestBody FlockKeeperRequest req) {
+    public ResponseEntity<AdministratorResponse> create(@Valid @RequestBody AdministratorRequest req) {
         var resp = svc.create(req);
         return ResponseEntity
-                .created(URI.create("/api/flockkeepers/" + resp.getIdEmployee()))
+                .created(URI.create("/api/administrators/" + resp.getIdEmployee()))
                 .body(resp);
     }
 
     @GetMapping
-    public ResponseEntity<List<FlockKeeperResponse>> all() {
+    public ResponseEntity<List<AdministratorResponse>> all() {
         return ResponseEntity.ok(svc.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FlockKeeperResponse> one(@PathVariable Long id) {
+    public ResponseEntity<AdministratorResponse> one(@PathVariable Long id) {
         return svc.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FlockKeeperResponse> update(
+    public ResponseEntity<AdministratorResponse> update(
             @PathVariable Long id,
-            @Valid @RequestBody FlockKeeperRequest req
+            @Valid @RequestBody AdministratorRequest req
     ) {
         return svc.update(id, req)
                 .map(ResponseEntity::ok)

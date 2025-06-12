@@ -12,5 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PoultryHouseRepository extends JpaRepository<PoultryHouse, Integer> {
+public interface PoultryHouseRepository extends JpaRepository<PoultryHouse, Long> {
+
+    void deleteReferenceByIdPoultry(Long aLong);
 }

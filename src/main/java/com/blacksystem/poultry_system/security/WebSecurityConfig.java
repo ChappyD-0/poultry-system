@@ -72,7 +72,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                 .requestMatchers("/api/flockkeeper/**").permitAll()
                                 .requestMatchers("/api/auth/**", "/api/signup").permitAll()
                                 .requestMatchers("/error").permitAll()
-                                //.requestMatchers("/api/test/**").permitAll()
+                                .requestMatchers("/api/flockkeepers").permitAll()
+                                .requestMatchers("/api/test/**").permitAll()
                                 .anyRequest().authenticated()
                 );
             //.requestMatchers("/error").permitAll() antes del ".anyRequest().authenticated()" y permite ver todos los errores

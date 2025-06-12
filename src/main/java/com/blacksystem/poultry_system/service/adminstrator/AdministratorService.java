@@ -1,140 +1,112 @@
-/*
- * -----------------------------------
- *  Project: poultry-system
- *  Author: chappyd-0
- *  Date: 6/3/25
- * -----------------------------------
- */
+// src/main/java/com/blacksystem/poultry_system/service/administrator/AdministratorService.java
 package com.blacksystem.poultry_system.service.adminstrator;
 
 import com.blacksystem.poultry_system.models.ERole;
 import com.blacksystem.poultry_system.models.Role;
 import com.blacksystem.poultry_system.models.User;
-import com.blacksystem.poultry_system.models.employees.FlockKeeper;
-import com.blacksystem.poultry_system.models.poultryplant.Zone;
-import com.blacksystem.poultry_system.payload.employee.FlockKeeperRequest;
+import com.blacksystem.poultry_system.models.employees.Administrator;
+import com.blacksystem.poultry_system.payload.employee.request.AdministratorRequest;
+import com.blacksystem.poultry_system.payload.employee.response.AdministratorResponse;
 import com.blacksystem.poultry_system.repository.RoleRepository;
 import com.blacksystem.poultry_system.repository.UserRepository;
 import com.blacksystem.poultry_system.repository.employee.AdministratorRepository;
-import com.blacksystem.poultry_system.repository.employee.FlockKeeperRepository;
-import com.blacksystem.poultry_system.repository.poultryplant.ZoneRepository;
 import com.blacksystem.poultry_system.service.MessageService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AdministratorService {
 
-    private final AdministratorRepository administratorRepository;
-    private final FlockKeeperRepository flockKeeperRepository;
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final MessageService messageService;
-
+    private final AdministratorRepository repo;
+    private final UserRepository      userRepo;
+    private final RoleRepository      roleRepo;
+    private final PasswordEncoder     encoder;
+    private final MessageService      msgs;
 
     public AdministratorService(
-            AdministratorRepository adminRepo,
-            FlockKeeperRepository flockKeeperRepository,
+            AdministratorRepository repo,
             UserRepository userRepo,
-            RoleRepository roleRepository,
-            PasswordEncoder passwordEncoder,
-            MessageService messageService
+            RoleRepository roleRepo,
+            PasswordEncoder encoder,
+            MessageService msgs
     ) {
-        this.administratorRepository = adminRepo;
-        this.flockKeeperRepository = flockKeeperRepository;
-        this.userRepository = userRepo;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.messageService = messageService;
+        this.repo     = repo;
+        this.userRepo = userRepo;
+        this.roleRepo = roleRepo;
+        this.encoder  = encoder;
+        this.msgs     = msgs;
     }
 
-    public ResponseEntity<String> createFlockKeeper(FlockKeeperRequest request) {
-        try {
-            User user = new User();
-            user.setUsername(request.getUsername());
-            user.setEmail(request.getEmail());
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
+    public AdministratorResponse create(AdministratorRequest req) {
+        var user = new User();
+        user.setUsername(req.getUsername());
+        user.setEmail(req.getEmail());
+        user.setPassword(encoder.encode(req.getPassword()));
+        var role = roleRepo.findByName(ERole.ROLE_ADMINISTRATOR)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+        user.setRoles(Set.of(role));
+        userRepo.save(user);
 
-            Role role = roleRepository.findByName(ERole.ROLE_FLOCKEERPER)
-                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
+        var admin = new Administrator();
+        admin.setUser(user);
+        admin.setNameEmployee(req.getNameEmployee());
+        admin.setLastName(req.getLastName());
+        admin.setMiddleName(req.getMiddleName());
+        admin.setBirthDate(req.getBirthDate());
+        admin.setRfcEmployee(req.getRfcEmployee());
+        admin.setUrlPhotoId(req.getUrlPhotoId());
+        repo.save(admin);
 
-            Set<Role> roles = new HashSet<>();
-            roles.add(role);
-            user.setRoles(roles);
-
-            userRepository.save(user);
-
-            FlockKeeper flockKeeper = new FlockKeeper();
-            flockKeeper.setNameEmployee(request.getNameEmployee());
-            flockKeeper.setLastName(request.getLastName());
-            flockKeeper.setMiddleName(request.getMiddleName());
-            flockKeeper.setBirthDate(request.getBirthDate());
-            flockKeeper.setRfcEmployee(request.getRfcEmployee());
-            flockKeeper.setUrlPhotoId(request.getUrlPhotoId());
-            flockKeeper.setUser(user);
-
-            flockKeeperRepository.save(flockKeeper);
-
-            String message = messageService.get("response.confirmation.creation.flock-keeper");
-            return ResponseEntity.status(HttpStatus.CREATED).body(message);
-        } catch (Exception e) {
-            String message = messageService.get("response.error.creation.flockkeeper");
-            return ResponseEntity.badRequest().body(message);
-        }
+        return map(admin);
     }
 
-    public ResponseEntity<String> updateFlockKeeper(Long id, FlockKeeperRequest request) {
-        try {
-            Optional<FlockKeeper> optional = flockKeeperRepository.findById(id);
-            if (optional.isPresent()) {
-                FlockKeeper fk = optional.get();
-                fk.setNameEmployee(request.getNameEmployee());
-                fk.setLastName(request.getLastName());
-                fk.setMiddleName(request.getMiddleName());
-                fk.setBirthDate(request.getBirthDate());
-                fk.setRfcEmployee(request.getRfcEmployee());
-                fk.setUrlPhotoId(request.getUrlPhotoId());
-
-                flockKeeperRepository.save(fk);
-                String message = messageService.get("response.confirmation.update.flockkeeper");
-                return ResponseEntity.ok(message);
-            } else {
-                return ResponseEntity.badRequest().body(messageService.get("response.error.no.found.flockkeeper"));
-            }
-        } catch (Exception e) {
-            String message = messageService.get("response.error.update.flockkeeper");
-            return ResponseEntity.badRequest().body(message);
-        }
+    public List<AdministratorResponse> findAll() {
+        return repo.findAll().stream()
+                .map(this::map)
+                .collect(Collectors.toList());
     }
 
-    public ResponseEntity<String> deleteFlockKeeper(Long id) {
-        try {
-            Optional<FlockKeeper> optional = flockKeeperRepository.findById(id);
-            if (optional.isPresent()) {
-                FlockKeeper fk = optional.get();
-                User user = fk.getUser();
-
-                flockKeeperRepository.delete(fk);
-                if (user != null) {
-                    userRepository.delete(user);
-                }
-                String message = messageService.get("response.confirmation.delete.flockkeeper");
-                return ResponseEntity.ok(message);
-            } else {
-                return ResponseEntity.badRequest().body(messageService.get("response.error.no.found.flockkeeper"));
-            }
-        } catch (Exception e) {
-            String message = messageService.get("response.error.delete.flockkeeper");
-            return ResponseEntity.badRequest().body(message);
-        }
+    public Optional<AdministratorResponse> findById(Long id) {
+        return repo.findById(id).map(this::map);
     }
 
+    public Optional<AdministratorResponse> update(Long id, AdministratorRequest req) {
+        return repo.findById(id).map(admin -> {
+            admin.setNameEmployee(req.getNameEmployee());
+            admin.setLastName(req.getLastName());
+            admin.setMiddleName(req.getMiddleName());
+            admin.setBirthDate(req.getBirthDate());
+            admin.setRfcEmployee(req.getRfcEmployee());
+            admin.setUrlPhotoId(req.getUrlPhotoId());
+            repo.save(admin);
+            return map(admin);
+        });
+    }
 
+    public void delete(Long id) {
+        repo.findById(id).ifPresent(admin -> {
+            userRepo.delete(admin.getUser());
+            repo.delete(admin);
+        });
+    }
+
+    private AdministratorResponse map(Administrator a) {
+        return new AdministratorResponse(
+                a.getIdEmployee(),
+                a.getUser().getUsername(),
+                a.getUser().getEmail(),
+                a.getNameEmployee(),
+                a.getLastName(),
+                a.getMiddleName(),
+                a.getBirthDate(),
+                a.getRfcEmployee(),
+                a.getUrlPhotoId()
+        );
+    }
 }
