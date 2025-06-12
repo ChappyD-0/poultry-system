@@ -59,14 +59,22 @@ public class WebSecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth ->
                 auth
-                    .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers("/api/test/**").permitAll()
-                    .requestMatchers("/api/flockkeeper/**").permitAll()
-                    .requestMatchers("/api/flockkeepers").permitAll()
-                    .requestMatchers("/api/signup").permitAll()
-                    .requestMatchers("/api/workers").permitAll() // ✅ se permite acceso libre a trabajadores
-                    .requestMatchers("/error").permitAll()
-                    .anyRequest().authenticated()
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/test/**").permitAll()
+                .requestMatchers("/api/signup").permitAll()
+                
+                // Granjeros (flockkeepers)
+                .requestMatchers("/api/flockkeeper/**").permitAll()
+                .requestMatchers("/api/flockkeepers/**").permitAll()
+                
+                // Administradores, Encargados, etc.
+                .requestMatchers("/api/managers/**").permitAll()
+                .requestMatchers("/api/administrators/**").permitAll()
+                .requestMatchers("/api/poultryhouses/**").permitAll()
+                .requestMatchers("/api/workers/**").permitAll()
+                .requestMatchers("/error").permitAll()
+                
+                .anyRequest().authenticated()
             );
 
         http.authenticationProvider(authenticationProvider());
