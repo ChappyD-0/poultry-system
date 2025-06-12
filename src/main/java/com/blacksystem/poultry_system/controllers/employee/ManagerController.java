@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/managers")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ManagerController {
 
     private final ManagerService svc;

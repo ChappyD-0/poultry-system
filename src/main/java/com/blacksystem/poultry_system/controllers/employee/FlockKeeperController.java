@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/flockkeepers")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FlockKeeperController {
 
     private final FlockKeeperService svc;

@@ -106,7 +106,8 @@ public class AdministratorService {
                 a.getMiddleName(),
                 a.getBirthDate(),
                 a.getRfcEmployee(),
-                a.getUrlPhotoId()
+                a.getUrlPhotoId(),
+                a.getStatus()
         );
     }
 }

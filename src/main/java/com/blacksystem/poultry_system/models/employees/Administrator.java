@@ -12,5 +12,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Administrator extends Employee{
+    private String status;
+
+    public Administrator() {
+        super(); // importante si Employee tiene lógica en su constructor
+    }
+
+      public String getStatus() {
+    return status;
+}
+
+public void setStatus(String status) {
+    this.status = status;
+}
+
 
 }

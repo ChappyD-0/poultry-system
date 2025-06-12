@@ -11,4 +11,13 @@ public class FlockKeeperResponse {
     private String nameEmployee;
     private String lastName;
     private LocalDate birthDate;
+    private String status;
+
+    public String getStatus() {
+    return status;
+}
+
+public void setStatus(String status) {
+    this.status = status;
+}
 }
