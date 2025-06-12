@@ -10,7 +10,6 @@ package com.blacksystem.poultry_system.service.poultryplant;
 import com.blacksystem.poultry_system.models.poultryplant.Mortality;
 import com.blacksystem.poultry_system.payload.poultryplant.request.MortalityRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.MortalityRepository;
-
 import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
