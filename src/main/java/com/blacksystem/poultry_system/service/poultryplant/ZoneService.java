@@ -11,6 +11,7 @@ import com.blacksystem.poultry_system.models.poultryplant.Zone;
 import com.blacksystem.poultry_system.payload.poultryplant.request.ZoneRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.ZoneRepository;
 import com.blacksystem.poultry_system.service.MessageService;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -96,4 +97,11 @@ public class ZoneService {
         return zoneRepository.findById(id).orElse(null);
     }
 
+    public boolean findZoneById(@NotNull Long idZone) {
+        try {
+            return zoneRepository.existsById(idZone.intValue());
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -32,7 +32,6 @@ public class FlockRequest {
     @NotNull
     private LocalDate dateFinish;
     @NotNull
-    private Zone flock;
-    @NotNull
-    private List<Mortality> mortalities = new ArrayList<>();
+    private Long idZone;
+
 }

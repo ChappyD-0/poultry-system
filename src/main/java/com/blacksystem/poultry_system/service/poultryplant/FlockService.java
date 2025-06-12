@@ -19,23 +19,30 @@ public class FlockService {
 
     private final FlockRepository flockRepository;
     private final MessageService messageService;
+    private final ZoneService zoneService;
 
-    public FlockService(FlockRepository flockRepository, MessageService messageService) {
+    public FlockService(FlockRepository flockRepository, MessageService messageService,
+                        ZoneService zoneService) {
         this.flockRepository = flockRepository;
         this.messageService = messageService;
+        this.zoneService = zoneService;
     }
 
     public ResponseEntity<String> createFlock(FlockRequest flockRequest) {
         try {
-            Flock flock = new Flock();
-            flock.setNum(flockRequest.getNum());
-            flock.setDateFinish(flockRequest.getDateFinish());
-            flock.setDateStart(flockRequest.getDateStart());
-            flock.setFlock(flockRequest.getFlock());
-            flock.setMortalities(flockRequest.getMortalities());
 
-            flockRepository.save(flock);
-            return ResponseEntity.ok(messageService.get("flock.created"));
+            if(!zoneService.findZoneById(flockRequest.getIdZone())) {
+                return ResponseEntity.badRequest().body(messageService.get("zone.not.found"));
+            }else {
+
+                Flock flock = new Flock();
+                flock.setNum(flockRequest.getNum());
+                flock.setDateFinish(flockRequest.getDateFinish());
+                flock.setDateStart(flockRequest.getDateStart());
+                flockRepository.save(flock);
+                return ResponseEntity.ok(messageService.get("flock.created"));
+            }
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(messageService.get("flock.creation.error"));
         }
@@ -49,12 +56,12 @@ public class FlockService {
             flock.setNum(flockRequest.getNum());
             flock.setDateFinish(flockRequest.getDateFinish());
             flock.setDateStart(flockRequest.getDateStart());
-            flock.setFlock(flockRequest.getFlock());
-            flock.setMortalities(flockRequest.getMortalities());
+
+
 
             flockRepository.save(flock);
             return ResponseEntity.ok(messageService.get("flock.updated"));
-        } catch (Exception e) {
+        } castch (Exception e) {
             return ResponseEntity.badRequest().body(messageService.get("flock.update.error"));
         }
     }
