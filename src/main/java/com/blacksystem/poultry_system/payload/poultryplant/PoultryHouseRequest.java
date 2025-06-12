@@ -17,8 +17,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PoultryHouseRequest {
-    @NotNull
-    private Long idPoultry;
+    // @NotNull
+    // private Long idPoultry;
     @NotNull
     private Zone zone;
     @NotNull

@@ -99,7 +99,8 @@ public class FlockKeeperService {
                 fk.getUser().getEmail(),
                 fk.getNameEmployee(),
                 fk.getLastName(),
-                fk.getBirthDate()
+                fk.getBirthDate(),
+                fk.getStatus()
         );
     }
 }

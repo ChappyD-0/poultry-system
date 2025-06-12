@@ -1,10 +1,3 @@
-/*
- * -----------------------------------
- *  Project: SpringSecurityApplication
- *  Author: chappyd-0
- *  Date: 5/8/25
- * -----------------------------------
- */
 package com.blacksystem.poultry_system.security;
 
 import com.blacksystem.poultry_system.security.jwt.AuthEntryPointJwt;
@@ -26,10 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableMethodSecurity
-// (securedEnabled = true,
-// jsr250Enabled = true,
-// prePostEnabled = true) // by default
-public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig {
+
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
@@ -64,21 +55,21 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/test/**").permitAll()
-                                .requestMatchers("/api/flockkeeper/**").permitAll()
-                                .requestMatchers("/api/auth/**", "/api/signup").permitAll()
-                                .requestMatchers("/error").permitAll()
-                                .requestMatchers("/api/flockkeepers").permitAll()
-                                .requestMatchers("/api/test/**").permitAll()
-                                .anyRequest().authenticated()
-                );
-            //.requestMatchers("/error").permitAll() antes del ".anyRequest().authenticated()" y permite ver todos los errores
-        http.authenticationProvider(authenticationProvider());
+            .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth ->
+                auth
+                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/test/**").permitAll()
+                    .requestMatchers("/api/flockkeeper/**").permitAll()
+                    .requestMatchers("/api/flockkeepers").permitAll()
+                    .requestMatchers("/api/signup").permitAll()
+                    .requestMatchers("/api/workers").permitAll() // ✅ se permite acceso libre a trabajadores
+                    .requestMatchers("/error").permitAll()
+                    .anyRequest().authenticated()
+            );
 
+        http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -22,9 +22,20 @@ public class FlockKeeper extends Employee{
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<PoultryHouse> poultryHouses = new ArrayList<>();
+    private String status;
 
 
     public FlockKeeper() {
 
     }
+
+    public String getStatus() {
+    return status;
+}
+
+public void setStatus(String status) {
+    this.status = status;
+}
+
+    
 }

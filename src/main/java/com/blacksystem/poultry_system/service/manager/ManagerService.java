@@ -98,7 +98,8 @@ public class ManagerService {
                 m.getUser().getUsername(),
                 m.getUser().getEmail(),
                 m.getNameEmployee(),
-                m.getLastName()
+                m.getLastName(),
+                m.getStatus()
         );
     }
 }
