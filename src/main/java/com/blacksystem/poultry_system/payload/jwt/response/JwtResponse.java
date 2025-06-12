@@ -5,7 +5,7 @@
  *  Date: 5/8/25
  * -----------------------------------
  */
-package com.blacksystem.poultry_system.payload.response;
+package com.blacksystem.poultry_system.payload.jwt.response;
 
 import java.util.List;
 

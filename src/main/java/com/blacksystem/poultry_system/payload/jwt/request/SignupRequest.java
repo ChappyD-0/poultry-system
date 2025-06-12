@@ -5,7 +5,7 @@
  *  Date: 5/8/25
  * -----------------------------------
  */
-package com.blacksystem.poultry_system.payload.request;
+package com.blacksystem.poultry_system.payload.jwt.request;
 
 
 import jakarta.validation.constraints.*;

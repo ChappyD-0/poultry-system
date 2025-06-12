@@ -3,7 +3,7 @@ package com.blacksystem.poultry_system.controllers.employee;
 
 import com.blacksystem.poultry_system.payload.employee.request.FlockKeeperRequest;
 import com.blacksystem.poultry_system.payload.employee.response.FlockKeeperResponse;
-import com.blacksystem.poultry_system.service.flockkeeper.FlockKeeperService;
+import com.blacksystem.poultry_system.service.employees.FlockKeeperService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

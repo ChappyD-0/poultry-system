@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blacksystem.poultry_system.service.adminstrator.AdministratorService;
-import com.blacksystem.poultry_system.service.flockkeeper.FlockKeeperService;
-import com.blacksystem.poultry_system.service.manager.ManagerService;
+import com.blacksystem.poultry_system.service.employees.AdministratorService;
+import com.blacksystem.poultry_system.service.employees.FlockKeeperService;
+import com.blacksystem.poultry_system.service.employees.ManagerService;
 
 
 @RestController

@@ -8,7 +8,7 @@
 package com.blacksystem.poultry_system.service.poultryplant;
 
 import com.blacksystem.poultry_system.models.poultryplant.Zone;
-import com.blacksystem.poultry_system.payload.poultryplant.ZoneRequest;
+import com.blacksystem.poultry_system.payload.poultryplant.request.ZoneRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.ZoneRepository;
 import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;

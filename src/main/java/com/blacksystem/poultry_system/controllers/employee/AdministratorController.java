@@ -3,7 +3,7 @@ package com.blacksystem.poultry_system.controllers.employee;
 
 import com.blacksystem.poultry_system.payload.employee.request.AdministratorRequest;
 import com.blacksystem.poultry_system.payload.employee.response.AdministratorResponse;
-import com.blacksystem.poultry_system.service.adminstrator.AdministratorService;
+import com.blacksystem.poultry_system.service.employees.AdministratorService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

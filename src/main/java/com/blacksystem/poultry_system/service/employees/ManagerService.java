@@ -1,18 +1,16 @@
-package com.blacksystem.poultry_system.service.manager;
+package com.blacksystem.poultry_system.service.employees;
 
 import com.blacksystem.poultry_system.models.ERole;
-import com.blacksystem.poultry_system.models.Role;
 import com.blacksystem.poultry_system.models.User;
 import com.blacksystem.poultry_system.models.employees.Manager;
 import com.blacksystem.poultry_system.payload.employee.request.ManagerRequest;
 import com.blacksystem.poultry_system.payload.employee.response.ManagerResponse;
-import com.blacksystem.poultry_system.repository.RoleRepository;
-import com.blacksystem.poultry_system.repository.UserRepository;
+import com.blacksystem.poultry_system.repository.jwt.RoleRepository;
+import com.blacksystem.poultry_system.repository.jwt.UserRepository;
 import com.blacksystem.poultry_system.repository.employee.ManagerRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;

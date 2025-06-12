@@ -5,7 +5,7 @@
  *  Date: 6/7/25
  * -----------------------------------
  */
-package com.blacksystem.poultry_system.payload.response;
+package com.blacksystem.poultry_system.payload.jwt.response;
 
 
 import org.springframework.http.HttpStatus;

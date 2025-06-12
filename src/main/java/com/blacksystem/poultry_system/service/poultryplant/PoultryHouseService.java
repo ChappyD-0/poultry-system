@@ -1,10 +1,9 @@
 package com.blacksystem.poultry_system.service.poultryplant;
 
 import com.blacksystem.poultry_system.models.poultryplant.PoultryHouse;
-import com.blacksystem.poultry_system.payload.poultryplant.PoultryHouseRequest;
+import com.blacksystem.poultry_system.payload.poultryplant.request.PoultryHouseRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.PoultryHouseRepository;
 import com.blacksystem.poultry_system.service.MessageService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,5 +51,9 @@ public class PoultryHouseService {
     public PoultryHouse findById(Long id) {
         return poultryHouseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("PoultryHouse no encontrada con ID: " + id));
+    }
+
+    public Boolean findPoultryHouseById(Long idPoultryHouse) {
+        return poultryHouseRepository.existsById(idPoultryHouse);
     }
 }
