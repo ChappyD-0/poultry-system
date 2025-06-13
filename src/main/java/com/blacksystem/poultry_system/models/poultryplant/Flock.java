@@ -1,10 +1,6 @@
-package com.blacksystem.poultry_system.models.flockmanagement;
+package com.blacksystem.poultry_system.models.poultryplant;
 
-import com.blacksystem.poultry_system.models.employees.Manager;
-import com.blacksystem.poultry_system.models.poultryplant.Mortality;
-import com.blacksystem.poultry_system.models.poultryplant.Zone;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

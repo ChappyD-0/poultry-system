@@ -36,14 +36,14 @@ public class ManagerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ManagerResponse> one(@PathVariable Long id) {
+    public ResponseEntity<ManagerResponse> findByIdManager(@PathVariable Long id) {
         return svc.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ManagerResponse> update(
+    public ResponseEntity<ManagerResponse> updateManager(
             @PathVariable Long id,
             @Valid @RequestBody ManagerRequest req
     ) {
@@ -53,7 +53,7 @@ public class ManagerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteManager(@PathVariable Long id) {
         svc.delete(id);
         return ResponseEntity.noContent().build();
     }

@@ -7,7 +7,7 @@
  */
 package com.blacksystem.poultry_system.service.poultryplant;
 
-import com.blacksystem.poultry_system.models.flockmanagement.Flock;
+import com.blacksystem.poultry_system.models.poultryplant.Flock;
 import com.blacksystem.poultry_system.payload.poultryplant.request.FlockRequest;
 import com.blacksystem.poultry_system.repository.poultryplant.FlockRepository;
 import com.blacksystem.poultry_system.service.MessageService;

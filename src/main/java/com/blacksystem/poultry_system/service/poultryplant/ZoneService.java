@@ -54,7 +54,7 @@ public class ZoneService {
 
     public ResponseEntity<String> updateZone(ZoneRequest zoneRequest, Long idZone) {
         try {
-            Zone zone = getZoneById(idZone.intValue());
+            Zone zone = getZoneById(idZone);
             if (zone != null) {
                 setValues(zoneRequest, zone);
                 zoneRepository.save(zone);
@@ -81,7 +81,7 @@ public class ZoneService {
         zone.setPoultryHouses(zoneRequest.getPoultryHouses());
     }
 
-    public ResponseEntity<String> deleteZone(Integer id) {
+    public ResponseEntity<String> deleteZone(Long id) {
         try {
             zoneRepository.deleteById(id);
             String message = messageService.get("response.confirmation.delete.zone");
@@ -93,13 +93,13 @@ public class ZoneService {
         }
     }
 
-    public Zone getZoneById(Integer id) {
+    public Zone getZoneById(Long id) {
         return zoneRepository.findById(id).orElse(null);
     }
 
     public boolean findZoneById(@NotNull Long idZone) {
         try {
-            return zoneRepository.existsById(idZone.intValue());
+            return zoneRepository.existsById(idZone);
         } catch (Exception e) {
             return false;
         }

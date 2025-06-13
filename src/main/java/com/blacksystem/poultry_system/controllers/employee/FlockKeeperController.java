@@ -36,7 +36,7 @@ public class FlockKeeperController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FlockKeeperResponse> one(@PathVariable Long id) {
+    public ResponseEntity<FlockKeeperResponse> findByIdAdministrator(@PathVariable Long id) {
         return svc.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

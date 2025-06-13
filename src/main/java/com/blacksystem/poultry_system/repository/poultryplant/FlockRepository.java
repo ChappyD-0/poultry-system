@@ -7,7 +7,7 @@
  */
 package com.blacksystem.poultry_system.repository.poultryplant;
 
-import com.blacksystem.poultry_system.models.flockmanagement.Flock;
+import com.blacksystem.poultry_system.models.poultryplant.Flock;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FlockRepository extends JpaRepository<Flock, Long> {

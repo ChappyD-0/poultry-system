@@ -9,7 +9,7 @@ package com.blacksystem.poultry_system.payload.poultryplant.request;
 
 import com.blacksystem.poultry_system.models.City;
 import com.blacksystem.poultry_system.models.employees.Manager;
-import com.blacksystem.poultry_system.models.flockmanagement.Flock;
+import com.blacksystem.poultry_system.models.poultryplant.Flock;
 import com.blacksystem.poultry_system.models.poultryplant.PoultryHouse;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

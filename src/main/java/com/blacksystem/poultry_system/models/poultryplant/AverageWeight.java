@@ -1,6 +1,5 @@
 package com.blacksystem.poultry_system.models.poultryplant;
 
-import com.blacksystem.poultry_system.models.flockmanagement.Flock;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

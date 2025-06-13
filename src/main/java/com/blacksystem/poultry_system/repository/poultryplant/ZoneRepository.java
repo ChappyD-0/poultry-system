@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 
 @Repository
-public interface ZoneRepository extends CrudRepository<Zone, Integer> {
+public interface ZoneRepository extends CrudRepository<Zone, Long> {
 
     public ArrayList<Zone> findAll();
 
