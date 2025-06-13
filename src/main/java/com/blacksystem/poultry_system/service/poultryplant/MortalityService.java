@@ -14,6 +14,8 @@ import com.blacksystem.poultry_system.service.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 // Código correcto ya fusionado y sin marcas de conflicto
 @Service
 public class MortalityService {
@@ -90,6 +92,18 @@ public class MortalityService {
             return ResponseEntity.ok(mortality);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    public ArrayList<Mortality> getAllMortalityByFlock(Long idFlock) {
+        try {
+            ArrayList<Mortality> mortalities = mortalityRepository.findAllByFlockId(idFlock);
+            if (mortalities.isEmpty()) {
+                return new ArrayList<>();
+            }
+            return mortalities;
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
     //git push

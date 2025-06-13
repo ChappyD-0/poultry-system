@@ -11,7 +11,10 @@ import com.blacksystem.poultry_system.models.poultryplant.Mortality;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Repository
 public interface MortalityRepository extends CrudRepository<Mortality, Long> {
 
+    ArrayList<Mortality> findAllByFlockId(Long idFlock);
 }
